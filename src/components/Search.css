@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,0");
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: rgb(15, 102, 232);
+  --text-color: white;
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.searchBar button {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+}
+
+.searchBar .inputSearch {
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.inputSearch input {
+  font-size: 2rem;
+  color: var(--text-color);
+  border: none;
+  background-color: #1c1c1d;
+  display: flex;
+  padding: 1rem;
+}
+
+.inputSearch input:focus {
+  outline: none;
+}
+
+.searchBar ul {
+  width: 100%;
+  list-style: none;
+  background-color: #1c1c1d;
+  border-radius: 5px;
+  font-size: 2rem;
+  color: var(--text-color);
+  overflow: hidden;
+  position: absolute;
+  top: 5rem;
+}
+
+.searchBar ul li {
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.searchBar ul li:hover {
+  background-color: var(--primary-color);
+}
+
+.inputSearch span {
+  color: var(--text-color);
+  padding: 1rem 2rem;
+}
