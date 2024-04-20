@@ -8,61 +8,57 @@ html, body, .container {
     height: 100%;
 }
 
-.movies {
+header, footer, .pagination {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+header {
+    flex-direction: column;
+}
+
+footer {
+    position: sticky;
+    height: 50px;
+    bottom: 0;
+    background-color: #242424;
+}
+
+.movies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     max-width: 1200px;
-    min-width: 280px;
-    margin-inline: auto;
-    gap: 10px;
+    margin: 0 auto;
+    gap: 20px;
 }
 
 .movies article {
-    width: 30%;
-    min-width: 260px;
-    min-height: 450px;
+    width: calc(20% - 10px);
+    height: 300px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 5px #000;
-    padding: 5px;
-    border-radius: 15% 5% / 15% 5%;
+    box-shadow: 0 0 5px #fff;
+    padding: 10px;
+    border-radius: 15px;
     cursor: pointer;
-    border: 3px double rgba(0,125, 195, 0.5);
+    border: 3px solid #fff;
 }
 
 .desc {
-    padding: 10px 5px;
+    padding: 15px;
     text-align: center;
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.desc h2 {
-    text-transform: uppercase;
-    text-decoration: underline;
-    padding-block: 15px;
-}
-
-#subtitle {
-    font-weight: bold;
-}
-
-.desc h3 {
-    font-weight: normal;
-    font-style: italic;
-    font-variant: small-caps;
-}
-
-.desc p { 
-    text-align: justify;
-    padding-block: 15px;
-}
-
-img {
-    height: 350px;
-    align-self: flex-start;
-    margin-inline: auto;
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
 }
 
 .pages {
@@ -70,15 +66,18 @@ img {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin-block: 20px;    
+    margin: 20px;
 }
 
-.pages button, .pages span{
+.pages button, .pages span {
     font-size: 1.3rem;
     background: transparent;
     border: none;
+    cursor: pointer;
 }
 
-.pages button {
-    cursor: pointer;
+.logo-image {
+    width: 150px;
+    height: auto;
+    margin-right: 10px;
 }

@@ -5,7 +5,6 @@
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,6 +19,14 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBar .inputSearch {
+  display: flex;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .searchBar button {
@@ -29,12 +36,8 @@
   justify-content: center;
   align-items: center;
   background-color: var(--primary-color);
-}
-
-.searchBar .inputSearch {
-  display: flex;
-  border-radius: 5px;
-  overflow: hidden;
+  color: var(--text-color);
+  padding: 1rem;
 }
 
 .inputSearch input {
@@ -42,7 +45,6 @@
   color: var(--text-color);
   border: none;
   background-color: #1c1c1d;
-  display: flex;
   padding: 1rem;
 }
 
@@ -73,5 +75,37 @@
 
 .inputSearch span {
   color: var(--text-color);
-  padding: 1rem 2rem;
+  padding: 1rem;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
+  gap: 20px; /* Espace entre les éléments */
+  padding: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: var(--text-color);
+  font-size: 1.2rem;
 }
