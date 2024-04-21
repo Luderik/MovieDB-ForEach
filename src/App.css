@@ -4,27 +4,26 @@
     padding: 0;
 }
 
-html, body, .container {
+html, body {
     height: 100%;
 }
 
-header, footer, .pagination {
+.main-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-footer {
-    position: sticky;
-    height: 50px;
-    bottom: 0;
-    background-color: #242424;
+.movie-results {
+    flex-grow: 1;
 }
 
 .movies {
@@ -37,22 +36,21 @@ footer {
 }
 
 .movies article {
-    width: calc(20% - 10px);
-    height: 300px;
+    width: calc(25% - 15px);
+    min-height: 400px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 5px #fff;
+    box-shadow: 0 0 10px #ccc;
     padding: 10px;
     border-radius: 15px;
     cursor: pointer;
-    border: 3px solid #fff;
+    border: 2px solid #fff;
 }
 
 .desc {
     padding: 15px;
     text-align: center;
     font-size: 1.2em;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .card img {
@@ -61,19 +59,31 @@ footer {
     border-radius: 15px;
 }
 
-.pages {
+.pagination {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin: 20px;
+    align-items: center;
+    margin: 20px 0;
 }
 
-.pages button, .pages span {
+.pagination-button {
     font-size: 1.3rem;
+    padding: 10px;
     background: transparent;
     border: none;
     cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: #242424;
+    color: white;
+    position: sticky;
+    bottom: 0;
+    padding: 10px;
 }
 
 .logo-image {

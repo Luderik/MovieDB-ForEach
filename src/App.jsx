@@ -10,6 +10,8 @@ const Movies = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
+  const siteTitle = 'Movie Search';
+  const authorName = 'Cédric HUET';
   const apiKey = '2064b486f6100c93a5d3208db08639f6';
   const urlBase = 'https://api.themoviedb.org/3';
 
@@ -21,8 +23,13 @@ const Movies = () => {
         : `${urlBase}/discover/movie?language=fr-FR&page=${page}&api_key=${apiKey}`;
       const response = await fetch(endpoint);
       const data = await response.json();
-
-      setMovies(data.results ? data.results.slice(0, 16) : []);
+  
+      const moviesWithDefaults = (data.results || []).map((movie) => ({
+        ...movie,
+        poster_path: movie.poster_path || 'default-poster.jpg', // valeur par défaut si `poster_path` est `null`
+      }));
+  
+      setMovies(moviesWithDefaults.slice(0, 16));
       setTotalPages(data.total_pages || 1);
     } catch (error) {
       console.error('Erreur lors du fetch:', error);
@@ -32,6 +39,7 @@ const Movies = () => {
       setIsLoading(false);
     }
   };
+  
 
   const handleSearch = (query) => {
     setHasSearched(true);
@@ -43,7 +51,7 @@ const Movies = () => {
     if (hasSearched) {
       fetchMovies(currentPage);
     }
-  }, [currentPage, hasSearched]); // Ajout de hasSearched comme dépendance
+  }, [currentPage, hasSearched]);
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
@@ -59,42 +67,44 @@ const Movies = () => {
         <SearchBar onSearch={handleSearch} />
       </header>
 
-      <section className="movie-results">
-        {isLoading ? (
-          <p>Chargement...</p>
-        ) : hasSearched && movies.length === 0 ? (
-          <p>Aucun résultat.</p>
-        ) : (
-          <div className="movies">
-            {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
-          </div>
-        )}
-      </section>
+      {isLoading ? (
+        <p>Chargement...</p>
+      ) : hasSearched && movies.length === 0 ? (
+        <p>Aucun résultat.</p>
+      ) : (
+        hasSearched && (
+          <section className="movie-results">
+            <div className="movies">
+              {movies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+            </div>
 
-      {hasSearched && (
-        <div className="pagination">
-          <button
-            className="pagination-button"
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage <= 1}
-          >
-            Précédent
-          </button>
-          <span className="pagination-current">Page {currentPage} de {totalPages}</span>
-          <button
-            className="pagination-button"
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage >= totalPages}
-          >
-            Suivant
-          </button>
-        </div>
+            {totalPages > 1 && (
+              <div className="pagination">
+                <button
+                  className="pagination-button"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage <= 1}
+                >
+                  Précédent
+                </button>
+                <span className="pagination-current">Page {currentPage} de {totalPages}</span>
+                <button
+                  className="pagination-button"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage >= totalPages}
+                >
+                  Suivant
+                </button>
+              </div>
+            )}
+          </section>
+        )
       )}
 
       <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} - Movie Search</p>
+        <p>&copy; {new Date().getFullYear()} - {authorName} - {siteTitle}</p>
       </footer>
     </div>
   );

@@ -15,7 +15,7 @@ function SearchBar() {
     setValue(event.target.value);
   }
 
-  async function searchMovies(page = 1) {
+  const searchMovies = async (page = 1) => {
     try {
       const response = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=2064b486f6100c93a5d3208db08639f6&language=fr-FR&query=${value}&page=${page}`
@@ -24,35 +24,49 @@ function SearchBar() {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      setMovies(data.results.slice(0, ITEMS_PER_PAGE)); // Limiter à 16 éléments
+      setMovies(data.results.slice(0, ITEMS_PER_PAGE)); // Limiter à 16 éléments par page
       setTotalResults(data.total_results);
-      setTotalPages(Math.ceil(totalResults / ITEMS_PER_PAGE)); // Total de pages basé sur totalResults
-      setCurrentPage(page); // Mettez à jour la page actuelle
+      setTotalPages(Math.ceil(totalResults / ITEMS_PER_PAGE));
+      setCurrentPage(page);
     } catch (error) {
       console.error('Error searching movies:', error);
     }
-  }
+  };
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
-      searchMovies(newPage); // Recherchez des films pour la nouvelle page
+      searchMovies(newPage);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      searchMovies(1); // Recherche lorsque l'utilisateur appuie sur Enter
     }
   };
 
   return (
-    <div className="searchBar">
-      <div className="inputSearch">
-        <input type="text" value={value} onChange={handleChange} />
-        <button onClick={() => searchMovies(1)}>
+    <div className="search-bar">
+      <div className="input-container">
+        <input
+          type="text"
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown} // Recherche avec "Enter"
+          placeholder="Rechercher un film..."
+        />
+        <button onClick={() => searchMovies(1)}> {/* Recherche avec le bouton */}
           <span className="material-symbols-outlined">search</span>
         </button>
       </div>
-      <div className="movies-grid"> {/* Configuration pour 4x4 */}
+
+      <div className="movies-grid"> {/* Affichage en grille pour 16 éléments */}
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
-      {totalPages > 1 && (
+
+      {totalPages > 1 && ( // Affichage de la pagination si plusieurs pages
         <div className="pagination">
           <button onClick={() => handlePageChange(1)}>Première page</button>
           <button onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>Précédent</button>
