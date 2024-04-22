@@ -2,23 +2,23 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const MovieDetails = () => {
-  const { movieId } = useParams(); // Récupère l'identifiant du film à partir de l'URL
-  const [movie, setMovie] = useState(null);
+  const { movieId } = useParams(); // Récupération de l'ID du film depuis l'URL
+  const [movie, setMovie] = useState(null); // État pour stocker les détails du film
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
-        const response = await fetch(
+      const response = await fetch(
         `https://api.themoviedb.org/3/movie/${movieId}?api_key=2064b486f6100c93a5d3208db08639f6&language=fr-FR`
-        );
-        const data = await response.json();
-      setMovie(data); // Mettre à jour l'état avec les détails du film
+      );
+      const data = await response.json();
+      setMovie(data); // Mise à jour des détails du film
     };
 
-    fetchMovieDetails(); // Appeler la fonction de récupération des détails
-  }, [movieId]); // Dépend de l'identifiant du film
+    fetchMovieDetails();
+  }, [movieId]); // Utilisation de movieId comme dépendance
 
   if (!movie) {
-    return <p>Chargement des détails...</p>; // Message pendant le chargement
+    return <p>Chargement des détails...</p>; // Indicateur de chargement
   }
 
   return (

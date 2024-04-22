@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
 
 const MovieCard = ({ movie }) => {
+  // Obtenir les propriétés nécessaires du film
   const { title, original_title, poster_path, vote_average } = movie;
 
+  // URL de l'affiche, avec une valeur par défaut si elle n'est pas définie
   const posterUrl = poster_path
     ? `https://image.tmdb.org/t/p/w500${poster_path}`
-    : 'default-poster.jpg'; // Image par défaut si `poster_path` est `null`
+    : 'default-poster.jpg';
 
   return (
-    <div className="card">
+    <article className="card">
+      {/* Afficher l'image de l'affiche du film */}
       <img
         src={posterUrl}
         alt={`Affiche du film ${title}`}
@@ -23,15 +26,16 @@ const MovieCard = ({ movie }) => {
           <strong>Note :</strong> {vote_average}/10
         </p>
       </div>
-    </div>
+    </article>
   );
 };
 
 MovieCard.propTypes = {
+  // Définition des types requis pour les propriétés du film
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     original_title: PropTypes.string.isRequired,
-    poster_path: PropTypes.string, // Non requis car il peut être `null`
+    poster_path: PropTypes.string,
     vote_average: PropTypes.number.isRequired,
   }).isRequired,
 };

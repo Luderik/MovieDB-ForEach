@@ -41,7 +41,7 @@ function SearchBar() {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      searchMovies(1); // Recherche lorsque l'utilisateur appuie sur Enter
+      searchMovies(1);
     }
   };
 
@@ -52,10 +52,10 @@ function SearchBar() {
           type="text"
           value={value}
           onChange={handleChange}
-          onKeyDown={handleKeyDown} // Recherche avec "Enter"
+          onKeyDown={handleKeyDown}
           placeholder="Rechercher un film..."
         />
-        <button onClick={() => searchMovies(1)}> {/* Recherche avec le bouton */}
+        <button onClick={() => searchMovies(1)}>
           <span className="material-symbols-outlined">search</span>
         </button>
       </div>
@@ -66,7 +66,7 @@ function SearchBar() {
         ))}
       </div>
 
-      {totalPages > 1 && ( // Affichage de la pagination si plusieurs pages
+      {totalPages > 1 && (
         <div className="pagination">
           <button onClick={() => handlePageChange(1)}>Première page</button>
           <button onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>Précédent</button>
